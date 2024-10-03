@@ -1,0 +1,14 @@
+.header {
+    padding: 1em;
+    height: 10%;
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 2px 2px 6px 1px rgba(128, 128, 128, 0.251);
+    
+    .logo {
+      max-width: min(25vw, 200px);
+      min-width: 100px;
+    }
+}

@@ -1,8 +1,7 @@
 import prisma from "@/lib/prisma";
-import { Activity } from "@/types/drivers";
-import { Prisma, Trace } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { GetStaticProps } from "next";
-import React, { useCallback } from "react";
+import React from "react";
 
 type DriverWithDuration = Prisma.DriverGetPayload<{
   include: {

@@ -1,5 +1,5 @@
 :root {
-  --page-bg: #e7baba;
+  --page-bg: #f5cccc;
 }
 
 body {
@@ -12,31 +12,10 @@ img {
   height: auto;
 }
 
-header, nav, main {
-  padding: 1rem;
-}
-
-header {
-  flex-basis: 100%;
-  outline: solid red 1px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  img {
-    max-width: min(25vw, 200px);
-  }
-
-}
-
-nav {
-  flex-basis: 20%;
-  outline: solid green 1px;
-}
-
 main {
+  padding: 1rem;
+  height: 90%;
   flex: 1;
-  outline: solid blue 1px;
 }
 
 li {

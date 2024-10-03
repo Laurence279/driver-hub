@@ -1,6 +1,9 @@
 import Head from "next/head"
 import React, { FC, PropsWithChildren } from "react"
 import styles from './layout.module.css';
+import { Header } from "@/components/Header/Header";
+import { Navbar } from "@/components/Navbar/Navbar";
+import { navItems } from "@/common/navItems";
 
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
     return (
@@ -11,16 +14,8 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <header>
-                <img src="https://placehold.co/200x75" alt="brand-logo" />
-            </header>
-            <nav>
-                <ul>
-                    <li>Nav Item</li>
-                    <li>Nav Item</li>
-                    <li>Nav Item</li>
-                </ul>
-            </nav>
+            <Header logoSrc="/images/logo.png" />
+            <Navbar navItems={navItems} />
             <main>{children}</main>
         </div>
     )
