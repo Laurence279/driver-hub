@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Driver {
+  id    Int     @id @unique
+  surname String
+  forename String
+  vehicleRegistration String
+  traces Trace[]
+}
+
+model Trace {
+  id Int     @id @default(autoincrement())
+  date String
+  activity Activity[]
+
+  driver Driver @relation(fields: [driverId], references: [id])
+  driverId Int
+}
+
+model Activity {
+  id Int @id @default(autoincrement())
+  startTime String
+  type String
+  duration Int
+
+  trace Trace @relation(fields: [traceId], references: [id])
+  traceId Int
+}
