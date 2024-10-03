@@ -1,18 +1,11 @@
-export interface Driver {
-    driverID: number;
-    surname: string;
-    forename: string;
-    vehicleRegistration: string;
-    traces: Trace[];
-}
+import { Prisma } from "@prisma/client"
 
-export interface Trace {
-    date: string;
-    activity: Activity[];
-}
-
-export interface Activity {
-    startTime: string;
-    type: 'drive' | 'rest' | 'work' | 'available';
-    duration: number;
-}
+export type Driver = Prisma.DriverGetPayload<{
+    include: {
+      traces: {
+        include: {
+          activity: boolean
+        }
+      }
+    }
+  }>

@@ -1,3 +1,6 @@
 export default function About() {
-    return <h1>Under development</h1>
+    return <div>
+        <h1>About</h1>
+        <p>Coming soon</p>
+    </div>
 }

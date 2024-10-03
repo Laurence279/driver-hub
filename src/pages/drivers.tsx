@@ -1,3 +1,6 @@
-export default function Vehicles() {
-    return <h1>Under development</h1>
+export default function Drivers() {
+    return <div>
+        <h1>Drivers</h1>
+        <p>Coming soon</p>
+    </div>
 }

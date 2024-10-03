@@ -1,24 +1,12 @@
+import { Box } from "@/components/Box/Box";
 import prisma from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { Driver } from "@/types/drivers";
 import { GetStaticProps } from "next";
+import { ClientPageRoot } from "next/dist/client/components/client-page";
 import React from "react";
 
-type DriverWithDuration = Prisma.DriverGetPayload<{
-  include: {
-    traces: {
-      include: {
-        activity: {
-          select: {
-            duration: boolean
-          }
-        }
-      }
-    }
-  }
-}>
-
 interface Props {
-  drivers: DriverWithDuration[];
+  drivers: Driver[];
 }
 
 function sumHours(total: number, current: number) {
@@ -26,6 +14,15 @@ function sumHours(total: number, current: number) {
 }
 
 export const Home: React.FC<Props> = ({ drivers }) => {
+  const days: string[] = [
+    "2021-02-01",
+    "2021-02-02",
+    "2021-02-03",
+    "2021-02-04",
+    "2021-02-05",
+    "2021-02-06",
+    "2021-02-07"
+  ];
 
   return (
     <>
@@ -33,19 +30,16 @@ export const Home: React.FC<Props> = ({ drivers }) => {
         {drivers.map((driver) => {
           const activities = driver.traces.map(t => t.activity).flat();
           const totalHours = activities.map(a => a.duration).reduce(sumHours, 0);
+          const daysActive = new Set(driver.traces.map(t => t.date));
           return (
             <div key={driver.id} className="card">
               <span>{driver.surname.toUpperCase()} {driver.forename}</span>
               <span>{driver.vehicleRegistration}</span>
               <span>{totalHours} Hours</span>
               <div className="boxes">
-                <div>M</div>
-                <div>T</div>
-                <div>W</div>
-                <div>T</div>
-                <div>F</div>
-                <div>S</div>
-                <div>S</div>
+                {days.map((day) => {
+                  return <Box key={`box-${day}`} fill={daysActive.has(day)} />
+                })}
               </div>
             </div>
           )
@@ -60,11 +54,7 @@ export const getStaticProps: GetStaticProps = async () => {
     include: {
       traces: {
         include: {
-          activity: {
-            select: {
-              duration: true
-            }
-          }
+          activity: true
         }
       }
     }

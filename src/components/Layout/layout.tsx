@@ -15,8 +15,10 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header logoSrc="/images/logo.png" />
-            <Navbar navItems={navItems} />
-            <main>{children}</main>
+            <div className={styles.main}>
+                <Navbar navItems={navItems} />
+                <main>{children}</main>
+            </div>
         </div>
     )
 }

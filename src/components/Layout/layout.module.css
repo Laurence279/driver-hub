@@ -3,10 +3,20 @@
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: column; 
 
     @media screen and (min-width: 768px) {
         height: 100svh;
+        flex-direction: row;
+    }
+}
+
+.main {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    @media screen and (min-width: 768px) {
         flex-direction: row;
     }
 }
