@@ -1,68 +1,44 @@
 import { Box } from "@/components/Box/Box";
+import { Input } from "@/components/Input/Input";
+import { Table, TableRow } from "@/components/Table/Table";
 import prisma from "@/lib/prisma";
 import { Driver } from "@/types/drivers";
-import { GetStaticProps } from "next";
-import { ClientPageRoot } from "next/dist/client/components/client-page";
-import React from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 interface Props {
   drivers: Driver[];
 }
 
-function sumHours(total: number, current: number) {
-  return total + current;
-}
+export const Home: React.FC<Props> = () => {
+  const [drivers, setDrivers] = useState<Driver[]>();
 
-export const Home: React.FC<Props> = ({ drivers }) => {
-  const days: string[] = [
-    "2021-02-01",
-    "2021-02-02",
-    "2021-02-03",
-    "2021-02-04",
-    "2021-02-05",
-    "2021-02-06",
-    "2021-02-07"
-  ];
+  async function getDrivers(filter?: string) {
+    const data = await fetch(`/api/drivers?filter=${filter ? filter : ""}`);
+    const { drivers } = await data.json();
+    setDrivers(drivers);
+  }
+  
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    getDrivers(e.target.value);
+  }
+  
+  useEffect(() => {
+    getDrivers();
+  }, []);
+
+  if (!drivers) {
+    return <div>
+      Loading...
+    </div>
+  }
 
   return (
     <>
-      <ul>
-        {drivers.map((driver) => {
-          const activities = driver.traces.map(t => t.activity).flat();
-          const totalHours = activities.map(a => a.duration).reduce(sumHours, 0);
-          const daysActive = new Set(driver.traces.map(t => t.date));
-          return (
-            <div key={driver.id} className="card">
-              <span>{driver.surname.toUpperCase()} {driver.forename}</span>
-              <span>{driver.vehicleRegistration}</span>
-              <span>{totalHours} Hours</span>
-              <div className="boxes">
-                {days.map((day) => {
-                  return <Box key={`box-${day}`} fill={daysActive.has(day)} />
-                })}
-              </div>
-            </div>
-          )
-        })}
-      </ul>
+      <Input label="Search entries:" onChange={handleChange} />
+      <br />
+      {drivers.length ? <Table drivers={drivers} /> : <div>No drivers found.</div>}
     </>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const drivers = await prisma.driver.findMany({
-    include: {
-      traces: {
-        include: {
-          activity: true
-        }
-      }
-    }
-  })
-  return {
-    props: { drivers },
-    revalidate: 10,
-  };
-};
 
 export default Home;

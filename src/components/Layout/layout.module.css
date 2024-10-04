@@ -1,13 +1,15 @@
 .layout {
     max-width: 1920px;
+    height: 100svh;
     margin: auto;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: column; 
+    
 
     @media screen and (min-width: 768px) {
-        height: 100svh;
         flex-direction: row;
+        flex-wrap: wrap;
     }
 }
 
@@ -15,8 +17,14 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    min-height: 90%;
 
     @media screen and (min-width: 768px) {
         flex-direction: row;
     }
+}
+
+.main > div {
+    flex: 1;
+    padding: 2rem;
 }

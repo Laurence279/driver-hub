@@ -12,12 +12,6 @@ img {
   height: auto;
 }
 
-main {
-  padding: 2rem;
-  height: 90%;
-  flex: 1;
-}
-
 li {
   list-style: none;
   &:not(:last-child) {
@@ -30,41 +24,10 @@ h1 {
   margin-bottom: 1rem;
 }
 
-.card {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  flex-direction: column;
-  padding: 1em;
-  border: solid 1px #000;
-
-  &:not(:last-child) {
-    margin-bottom: 0.5em;
-  }
-
-  & > * {
-    flex: 1;
-    max-width: 300px;
-  }
-
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
-  }
-
-  &:nth-child(odd) {
-    background: #ddacac;
-  }
-}
-
 .boxes {
   display: flex;
   gap: 1em;
   text-align: center;
-  & > * {
-    width: 25px;
-    height: 25px;
-    border: solid #000 1px;
-  }
 }
 
 * {

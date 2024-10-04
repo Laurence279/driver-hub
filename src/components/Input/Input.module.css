@@ -1,0 +1,15 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1.25rem;
+}
+
+.input input {
+    padding: 0.25em;
+    font-size: 1.125rem;
+    border-radius: 8px;
+    border: solid #636060 1px;
+}

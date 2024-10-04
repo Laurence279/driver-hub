@@ -11,6 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
+  const filter = req.query.filter;
   const drivers = await prisma.driver.findMany({
     include: {
       traces: {
@@ -18,8 +19,23 @@ export default async function handler(
           activity: true
         }
       }
-    }
-  });
-  console.log(drivers)
+    },
+    where: filter ? {
+      OR: [
+        {
+          forename: {
+            contains: filter?.toString(),
+          },
+        },
+        { surname: {
+          contains: filter?.toString()
+        } },
+        {
+          vehicleRegistration: {
+            contains: filter.toString()
+          }
+        }
+      ]
+    }: {}});
   res.status(200).json({ drivers });
 }
