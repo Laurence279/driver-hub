@@ -1,6 +1,6 @@
 :root {
-  --page-bg: #f5cccc;
-  --primary-bg: linear-gradient(45deg, #ddb6b6, #e08d8d);
+  --page-bg: #fcf8f8;
+  --primary-bg: linear-gradient(45deg, #e0dada, 66%, #d67c7c);
 }
 
 body {
@@ -38,11 +38,11 @@ a {
 
 button {
   padding: 0.5em 1em;
-  border-radius: 10px;
   border: solid #000 1px;
-  background: #e08d8d;
+  background: #fff;
   color: #000;
   cursor: pointer;
+  font-weight: bold;
   font-size: 1rem;
   box-shadow: 2px 2px 6px 1px rgba(128, 128, 128, 0.251);
   transition: all 0.2s;
