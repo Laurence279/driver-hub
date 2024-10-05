@@ -24,15 +24,17 @@ export default async function handler(
         }
     });
 
-    const days: {[key:string]: string | undefined} = {}
+    const days: {[key:string]: string} = {}
 
     for (const a of data) {
         const trace = await prisma.trace.findUnique({
             where: {
                 id: a.traceId
             }
-        })
-        days[a.traceId] = trace?.date;
+        });
+        if (trace) {
+            days[a.traceId] = trace.date;
+        }
     }
 
     const activities: Activity[] = data.map((a) => {
