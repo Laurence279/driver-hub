@@ -4,6 +4,10 @@
     border-collapse: collapse;
 }
 
+.table tbody {
+    box-shadow: 2px 2px 4px 2px rgba(128, 128, 128, 0.251);
+}
+
 .table tr {
     border: solid 1px #000;
 
@@ -40,10 +44,19 @@
 
 .table thead tr {
     border: none;
+    background: #da2323d2;
+    border: solid 1px #000;
+    color: #fff;
 }
 
 .table thead {
     @media screen and (max-width: 1025px) {
         display: none;
     }
+}
+
+.boxes {
+    display: flex;
+    gap: 0.5em;
+    text-align: center;
 }

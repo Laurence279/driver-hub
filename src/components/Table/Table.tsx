@@ -1,10 +1,11 @@
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
 import styles from './Table.module.css';
 import { Box } from "../Box/Box";
 import { Driver } from "@/types/drivers";
 
 interface Props {
     drivers: Driver[];
+    onView: (driverId: number) => void;
 }
 
 function sumMinutes(total: number, current: number) {
@@ -27,39 +28,42 @@ const days: string[] = [
     "2021-02-07"
 ];
 
-export const Table: FC<Props> = ({ drivers }) => {
+export const Table: FC<Props> = ({ drivers, onView }) => {
     return <table className={styles.table}>
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Vehicle reg</th>
                 <th>Total activity duration</th>
-                <th>Week</th>
+                <th>Week commencing {days[0]}</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {drivers.map((driver) => {
-            const activities = driver.traces.map(t => t.activity).flat();
-            const totalHours = activities.map(a => a.duration).reduce(sumMinutes, 0);
-            const daysActive = new Set(driver.traces.map(t => t.date));
             return (
                 <tr key={driver.id}>
                     <td>
-                        <span>{driver.surname.toUpperCase()} {driver.forename}</span>
+                        {driver.surname.toUpperCase()} {driver.forename}
                     </td>
                     <td>
-                        <span>{driver.vehicleRegistration}</span>
+                        {driver.vehicleRegistration}
                     </td>
                     <td>
-                        <span>{totalHours} Minutes</span>
+                        {driver.totalActivity} Minutes
                     </td>
                     <td>
-                        <div className="boxes">
+                        <div className={styles.boxes}>
                             {days.map((day) => {
                                 const label = getDayName(day);
-                            return <Box key={`box-${day}`} label={label[0]} fill={daysActive.has(day)} />
+                            return <Box key={`box-${day}`} label={label} fill={driver.daysActive.includes(day)} />
                             })}
                         </div>
+                    </td>
+                    <td>
+                        <button onClick={() => onView(driver.id)}>
+                            View more
+                        </button>
                     </td>
                 </tr>
             )

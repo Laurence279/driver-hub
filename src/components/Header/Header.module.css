@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: flex-start;
     box-shadow: 2px 2px 6px 1px rgba(128, 128, 128, 0.251);
+    background: var(--primary-bg);
     
     .logo {
       max-width: min(25vw, 200px);

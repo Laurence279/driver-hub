@@ -7,8 +7,8 @@ interface Props {
 }
 
 export const Box: FC<Props> = ({ fill, label }) => {
-    return <div>
-        <div className={styles.label}>{label}</div>
+    return <div title={label}>
+        <div className={styles.label}>{label[0]}</div>
         <div className={`${styles.box} ${fill ? styles.fill : ''}`}></div>
     </div>
 }
