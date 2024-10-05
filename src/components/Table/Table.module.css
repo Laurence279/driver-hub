@@ -40,6 +40,9 @@
     &:nth-child(odd) {
         background: #ddacac;
     } 
+    &:nth-child(even) {
+        background: #eceaea;
+    } 
 }
 
 .table thead tr {
