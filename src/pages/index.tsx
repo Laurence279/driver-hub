@@ -1,11 +1,9 @@
-import { Box } from "@/components/Box/Box";
 import { Dialog } from "@/components/Dialog/Dialog";
 import { Input } from "@/components/Input/Input";
-import { Table, TableRow } from "@/components/Table/Table";
-import prisma from "@/lib/prisma";
-import { Driver, DriverDetails, GetDriversResult } from "@/types/drivers";
-import { NextApiResponse } from "next";
+import { Table } from "@/components/Table/Table";
 import React, { ChangeEvent, useEffect, useState } from "react";
+import { api } from "@/common/api";
+import { Driver } from "@/types/driver";
 
 export const Home: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -14,8 +12,7 @@ export const Home: React.FC = () => {
   const [showDialog, setShowDialog] = useState<boolean>(false);
 
   async function getDrivers(filter?: string) {
-    const res = await fetch(`/api/drivers?filter=${filter ? filter : ""}`);
-    const { drivers } = await res.json() as GetDriversResult;
+    const drivers = await api.getDrivers(filter);
     setDrivers(drivers);
     setLoading(false);
   }

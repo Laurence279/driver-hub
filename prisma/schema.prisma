@@ -16,6 +16,7 @@ model Driver {
   forename String
   vehicleRegistration String
   traces Trace[]
+  activities Activity[]
 }
 
 model Trace {
@@ -35,4 +36,7 @@ model Activity {
 
   trace Trace @relation(fields: [traceId], references: [id])
   traceId Int
+
+  driver Driver @relation(fields: [driverId], references: [id])
+  driverId Int
 }

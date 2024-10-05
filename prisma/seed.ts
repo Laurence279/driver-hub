@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Activity, PrismaClient } from '@prisma/client';
 import json from './drivers.json';
 
 const prisma = new PrismaClient();
@@ -22,7 +22,8 @@ async function main() {
                   return {
                     startTime: a.startTime,
                     duration: a.duration,
-                    type: a.type
+                    type: a.type,
+                    driverId: d.driverID
                   }
                 })
               }

@@ -1,6 +1,6 @@
 import { sum } from "@/common/helpers";
 import prisma from "@/lib/prisma";
-import { Driver, GetDriversResult } from "@/types/drivers";
+import { Driver, GetDriversResult } from "@/types/driver";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

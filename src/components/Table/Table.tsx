@@ -1,32 +1,14 @@
 import { FC } from "react";
 import styles from './Table.module.css';
 import { Box } from "../Box/Box";
-import { Driver } from "@/types/drivers";
+import { Driver } from "@/types/driver";
+import { days } from "@/common/days";
+import { getDayName } from "@/common/helpers";
 
 interface Props {
     drivers: Driver[];
     onView: (driverId: number) => void;
 }
-
-function sumMinutes(total: number, current: number) {
-    return total + current;
-  }
-
-  function getDayName(dateStr: string)
-  {
-      const date = new Date(dateStr);
-      return date.toLocaleDateString('en-GB', { weekday: 'long' });        
-  }
-
-const days: string[] = [
-    "2021-02-01",
-    "2021-02-02",
-    "2021-02-03",
-    "2021-02-04",
-    "2021-02-05",
-    "2021-02-06",
-    "2021-02-07"
-];
 
 export const Table: FC<Props> = ({ drivers, onView }) => {
     return <table className={styles.table}>

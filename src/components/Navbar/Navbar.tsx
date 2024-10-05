@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC } from "react"
 import styles from "./Navbar.module.css"
 import { NavItem } from "@/types/navItem";
 import { useRouter } from "next/router";
