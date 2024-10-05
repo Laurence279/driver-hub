@@ -41,7 +41,7 @@ export default async function handler(
         return {
             day: days[a.traceId.toString()],
             type: a.type as Activity["type"],
-            duration: a._sum.duration
+            duration: a._sum.duration || 0
         }
     })
 

@@ -47,7 +47,7 @@
     box-shadow: 2px 2px 6px 8px rgba(26, 25, 25, 0.301);
 }
 
-.dialog div {
+.dialog div span:first-child {
     text-transform: capitalize;
 }
 

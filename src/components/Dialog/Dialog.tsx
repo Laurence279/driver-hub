@@ -28,6 +28,11 @@ export const Dialog: FC<Props> = ({ driver, open, onClose }) => {
 
     const days = new Set(activities?.map(a => a.day));
 
+    const totalGroupedActivityType = activities && activities.reduce((a: Record<string, number>, { type, duration }) => {
+        a[type] = (a[type] || 0) + duration;
+        return a;
+    }, {});
+
     return (
       <div className={`${styles.dialog} ${open ? styles.active : ''}`}>
         <div className={styles.wrapper}>
@@ -42,11 +47,17 @@ export const Dialog: FC<Props> = ({ driver, open, onClose }) => {
                                 return <div className={styles.entry} key={d}>
                                         <strong>{new Date(d).toDateString()}</strong>
                                         {activities.filter(a => a.day === d).map((a, i) => {
-                                            return <div key={a.day + "-" + i}><span>{a.type}:</span><span>{a.duration} Minutes</span></div>
+                                            return <div key={a.day + "-" + i}><span>{a.type}:</span><span>{a.duration} minutes</span></div>
                                         })}
                                     </div>
                             })}
-                            <div><strong>Weekly total:</strong>{driver?.totalActivity} Minutes</div>
+                            <div className={styles.entry}>
+                                <strong>Weekly totals</strong>
+                                {totalGroupedActivityType && Array.from(Object.keys(totalGroupedActivityType).sort()).map((type) => {
+                                    return <div key={type}><span>{type}:</span><span>{totalGroupedActivityType[type]} minutes</span></div>
+                                })}
+                                <div><strong>Total:</strong><strong>{driver?.totalActivity} minutes</strong></div>
+                            </div>
                         </>
                     ) : (
                         <div>No activity found for this driver.. Possibly on holiday?</div>
